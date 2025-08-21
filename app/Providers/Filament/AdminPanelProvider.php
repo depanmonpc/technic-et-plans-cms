@@ -22,6 +22,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationGroup;
+use App\Filament\Admin\Pages\SiteSettingsPage;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -36,9 +38,10 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
-                Dashboard::class,
-                EditProfile::class,
-            ])
+    Dashboard::class,
+    EditProfile::class,
+    SiteSettingsPage::class, // ✅ ajoute ta page
+])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
                 AccountWidget::class,
@@ -55,18 +58,13 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
-            ])
+    \App\Http\Middleware\EnsureUserIsAdmin::class,
+])
+
             ->navigationGroups([
-                NavigationGroup::make()
-                    ->label('Administration')
-                    ->icon('heroicon-o-cog'),
-                NavigationGroup::make()
-                    ->label('Content')
-                    ->icon('heroicon-o-document-text'),
-                NavigationGroup::make()
-                    ->label('Settings')
-                    ->icon('heroicon-o-adjustments-horizontal'),
+                NavigationGroup::make()->label('Administration'),
+                NavigationGroup::make()->label('Content'),
+                NavigationGroup::make()->label('Settings'),
             ])
             ->plugins([
                 FilamentShieldPlugin::make()

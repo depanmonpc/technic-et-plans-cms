@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             SiteSettingsSeeder::class,
             GuestLayoutManagmentSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

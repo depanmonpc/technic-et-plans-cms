@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Modules\ModuleManager;
 use App\Modules\ModuleServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Fix for "1071: La clé est trop longue" (MySQL < 5.7.7 / MariaDB < 10.2.2)
+        Schema::defaultStringLength(191);
     }
 }

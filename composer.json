@@ -9,8 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "filament/filament": "^4.0",
         "bezhansalleh/filament-shield": "~4.0",
+        "filament/filament": "^4.0",
         "guzzlehttp/guzzle": "^7.8",
         "intelrx/sitesettings": "^2.0",
         "joelbutcher/socialstream": "*",
@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.0",
         "spatie/laravel-menu": "^4.2",
+        "spatie/laravel-settings": "^3.4",
         "spiral/roadrunner-cli": "^2.6.0",
         "spiral/roadrunner-http": "^3.3.0"
     },

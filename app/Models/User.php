@@ -102,10 +102,6 @@ class User extends Authenticatable implements HasDefaultTenant, HasTenants, Fila
     /**
      * Check if user has permission to perform an action
      */
-    public function hasPermissionTo($permission): bool
-    {
-        return $this->hasPermissionViaRole($permission) || parent::hasPermissionTo($permission);
-    }
 
     /**
      * Check if user has a specific permission through any of their roles

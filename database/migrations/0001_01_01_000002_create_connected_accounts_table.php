@@ -14,8 +14,16 @@ return new class extends Migration
         Schema::create('connected_accounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('provider');
-            $table->string('provider_id');
+
+            // ✅ Ajout de la colonne manquante 'provider' avec longueur limitée
+            $table->string('provider', 100);
+
+            // ✅ Limitation de 'provider_id' également
+            $table->string('provider_id', 100);
+
+            // ✅ Index composite sur les deux colonnes limitées
+            $table->index(['provider', 'provider_id']);
+
             $table->string('name')->nullable();
             $table->string('nickname')->nullable();
             $table->string('email')->nullable();
@@ -28,7 +36,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['user_id', 'id']);
-            $table->index(['provider', 'provider_id']);
         });
     }
 
