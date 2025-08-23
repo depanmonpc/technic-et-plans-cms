@@ -78,9 +78,6 @@
             unset($itemsBeforeThemeSwitcher['profile']);
         ?>
 
-        <?php echo e(\Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_BEFORE)); ?>
-
-
         <?php if (isset($component)) { $__componentOriginal7a83b62094aac4ed8d85f403cf23f250 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal7a83b62094aac4ed8d85f403cf23f250 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.dropdown.header','data' => ['color' => $itemColor,'icon' => $itemIcon]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -103,9 +100,6 @@
 <?php $component = $__componentOriginal7a83b62094aac4ed8d85f403cf23f250; ?>
 <?php unset($__componentOriginal7a83b62094aac4ed8d85f403cf23f250); ?>
 <?php endif; ?>
-
-        <?php echo e(\Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_AFTER)); ?>
-
     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
     <!--[if BLOCK]><![endif]--><?php if($itemsBeforeThemeSwitcher->isNotEmpty()): ?>

@@ -1,9 +1,17 @@
-<x-guest-layout>
-        @if ($contents)
-            @foreach ($contents as $element)
-                @include('partials.elements.' . $element['name'])
-            @endforeach
-        @else
-            <p>No content found</p>
-        @endif
-</x-guest-layout>
+<div>
+    {{-- Inclusion du header --}}
+    @include('partials.header')
+
+    {{-- Modules dynamiques --}}
+    @foreach ($contents as $content)
+        {!! $content['content'] !!}
+    @endforeach
+
+    {{-- Bloc des 3 derniers articles --}}
+    @if (!empty($articles) && $articles->count() > 0)
+        @include('partials.latest-articles', ['articles' => $articles])
+    @endif
+
+    {{-- Footer --}}
+    @include('partials.footer')
+</div>

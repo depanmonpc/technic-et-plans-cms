@@ -334,19 +334,8 @@ unset($__defined_vars, $__key, $__value); ?>
             <script>
                 const errorNotifications = <?php echo \Illuminate\Support\Js::from($this->getErrorNotifications())->toHtml() ?>
 
-                let hasFatalRequestError = false
-
                 Livewire.hook('request', ({ fail }) => {
                     fail(({ status, preventDefault }) => {
-                        if (
-                            [419, 502].includes(status) &&
-                            hasFatalRequestError
-                        ) {
-                            return
-                        }
-
-                        hasFatalRequestError = [419, 502].includes(status)
-
                         preventDefault()
 
                         const errorNotification =

@@ -10,7 +10,11 @@
     "require": {
         "php": "^8.4",
         "bezhansalleh/filament-shield": "~4.0",
-        "filament/filament": "^4.0",
+        "filament/actions": "4@beta",
+        "filament/filament": "4@beta",
+        "filament/forms": "4@beta",
+        "filament/support": "4@beta",
+        "filament/tables": "4@beta",
         "guzzlehttp/guzzle": "^7.8",
         "intelrx/sitesettings": "^2.0",
         "joelbutcher/socialstream": "*",
