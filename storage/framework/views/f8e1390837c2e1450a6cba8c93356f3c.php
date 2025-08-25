@@ -1,66 +1,71 @@
 <!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <title><?php echo $__env->yieldContent('title', config('app.name', 'Technic & Plans')); ?></title>
+    <meta name="description" content="<?php echo $__env->yieldContent('meta_description', 'Technic & Plans - Études & plans pour l\'habitat'); ?>">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Normalize CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Roboto+Condensed:400,300,700" type="text/css">
 
-    <!-- Scripts -->
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css"/>
+
+    <!-- Ton style CSS principal -->
+    <link rel="stylesheet" href="<?php echo e(asset('asset/css/style.css')); ?>">
+
+    <!-- Scripts compilés -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 
-    <!-- Styles -->
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
 
 </head>
-<body class="font-sans antialiased">
-    <?php if (isset($component)) { $__componentOriginalff9615640ecc9fe720b9f7641382872b = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalff9615640ecc9fe720b9f7641382872b = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.banner','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('banner'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalff9615640ecc9fe720b9f7641382872b)): ?>
-<?php $attributes = $__attributesOriginalff9615640ecc9fe720b9f7641382872b; ?>
-<?php unset($__attributesOriginalff9615640ecc9fe720b9f7641382872b); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalff9615640ecc9fe720b9f7641382872b)): ?>
-<?php $component = $__componentOriginalff9615640ecc9fe720b9f7641382872b; ?>
-<?php unset($__componentOriginalff9615640ecc9fe720b9f7641382872b); ?>
-<?php endif; ?>
+<body class="font-sans antialiased bg-white">
 
-    <div class="min-h-screen bg-gray-100">
-        
+    
+    <header class="header">
+        <div class="content">
+            <a href="<?php echo e(route('home')); ?>">
+                <img src="<?php echo e(asset('asset/img/logo.png')); ?>"
+                     alt="Technic & Plans - Conception de plans et permis de construire"
+                     class="header-logo">
+            </a>
+            <nav class="header-menu">
+                <a href="<?php echo e(route('home')); ?>"
+                   class="header-menu-item<?php echo e(request()->routeIs('home') ? ' header-menu-item-active' : ''); ?>">
+                    ACCUEIL
+                </a>
+                <a href="<?php echo e(route('notre-savoir-faire')); ?>"
+                   class="header-menu-item<?php echo e(request()->routeIs('notre-savoir-faire') ? ' header-menu-item-active' : ''); ?>">
+                    NOTRE SAVOIR FAIRE
+                </a>
+                <a href="<?php echo e(route('courtage-travaux')); ?>"
+                   class="header-menu-item<?php echo e(request()->routeIs('courtage-travaux') ? ' header-menu-item-active' : ''); ?>">
+                    COURTAGE TRAVAUX
+                </a>
+                <a href="<?php echo e(route('contact')); ?>"
+                   class="header-menu-item<?php echo e(request()->routeIs('contact') ? ' header-menu-item-active' : ''); ?>">
+                    CONTACT
+                </a>
+            </nav>
+            <img src="<?php echo e(asset('asset/img/ombre.png')); ?>" alt="" class="header-shadow">
+        </div>
+    </header>
 
-        <!-- Page Heading -->
-        <!--[if BLOCK]><![endif]--><?php if(isset($header)): ?>
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <?php echo e($header); ?>
+    
+    <main>
+        <?php echo e($slot ?? ''); ?>
 
-                </div>
-            </header>
-        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+        <?php echo $__env->yieldContent('content'); ?>
+    </main>
 
-        <!-- Page Content -->
-        <main>
-            
-            <?php echo e($slot ?? ''); ?>
 
-            <?php echo $__env->yieldContent('content'); ?>
-        </main>
-    </div>
+<?php echo $__env->make('partials.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
     <?php echo $__env->yieldPushContent('modals'); ?>
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>

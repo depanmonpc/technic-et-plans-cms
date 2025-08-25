@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import { viteStaticCopy } from "vite-plugin-static-copy";
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
     base: '/',
@@ -16,11 +16,16 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {
-                    src: "resources/images/*",
-                    dest: "images",
+                    src: 'resources/images/*',
+                    dest: 'images',
                 },
             ],
         }),
     ],
-
+    resolve: {
+        alias: {
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        }
+    }
 });
