@@ -16,7 +16,7 @@
         "filament/support": "4@beta",
         "filament/tables": "4@beta",
         "guzzlehttp/guzzle": "^7.8",
-        "intelrx/sitesettings": "^2.0",
+        "intelrx/sitesettings": "^3.2",
         "joelbutcher/socialstream": "*",
         "laravel/framework": "^12",
         "laravel/jetstream": "*",
