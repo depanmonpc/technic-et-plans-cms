@@ -16,11 +16,11 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css"/>
 
-    <!-- Ton style CSS principal -->
-    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
-
     <!-- Scripts compilés -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Ton style CSS principal -->
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
 
     @livewireStyles
 </head>

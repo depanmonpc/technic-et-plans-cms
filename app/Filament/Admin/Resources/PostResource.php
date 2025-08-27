@@ -6,16 +6,18 @@ use App\Filament\Admin\Resources\PostResource\Pages;
 use App\Models\Post;
 use BackedEnum;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Grid; // <-- v4 layout component
-use Filament\Schemas\Components\Utilities\Get; // <-- v4 utilities
-use Filament\Schemas\Components\Utilities\Set; // <-- v4 utilities
-use Filament\Schemas\Schema; // <-- v4 Schema
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use UnitEnum;
@@ -56,6 +58,20 @@ class PostResource extends Resource
                     ->columnSpanFull(),
             ]),
 
+            Grid::make()->schema([
+                FileUpload::make('thumbnail')
+    ->label('Image principale')
+    ->image()
+    ->disk('public') // 🔒 correspond à 'disks.public' dans filesystem.php
+    ->directory('posts') // 📁 donc => /storage/app/public/posts
+    ->preserveFilenames()
+    ->visibility('public')
+    ->imageEditor()
+    ->openable()
+    ->downloadable()
+    ->previewable(true),
+            ]),
+
             Grid::make(2)->schema([
                 Select::make('user_id')
                     ->label('Auteur')
@@ -90,38 +106,46 @@ class PostResource extends Resource
         ]);
     }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('title')->label('Titre')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('category.name')->label('Catégorie')->toggleable(),
-                Tables\Columns\IconColumn::make('featured')->label('À la une')->boolean()->toggleable(),
-                Tables\Columns\TextColumn::make('published_at')->label('Publié le')->dateTime()->sortable(),
-                Tables\Columns\TextColumn::make('user.name')->label('Auteur')->toggleable(),
-            ])
-            ->filters([
-                Tables\Filters\TernaryFilter::make('published')
-                    ->label('Publié')
-                    ->trueLabel('Avec date de publication')
-                    ->falseLabel('Sans date de publication')
-                    ->queries(
-                        true: fn ($q) => $q->whereNotNull('published_at')->where('published_at', '<=', now()),
-                        false: fn ($q) => $q->whereNull('published_at'),
-                        blank: fn ($q) => $q,
-                    ),
-                Tables\Filters\SelectFilter::make('category_id')
-                    ->relationship('category', 'name')
-                    ->label('Catégorie'),
-            ])
-            ->actions([
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                \Filament\Actions\DeleteBulkAction::make(),
-            ]);
-    }
+public static function table(Table $table): Table
+{
+    return $table
+        ->columns([
+            Tables\Columns\ImageColumn::make('thumbnail')
+                ->label('Image')
+                ->disk('public')
+                ->circular()
+                ->height(60)
+                ->url(fn ($record) => $record->thumbnail ? asset('storage/' . $record->thumbnail) : null),
+
+            Tables\Columns\TextColumn::make('title')->label('Titre')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('category.name')->label('Catégorie')->toggleable(),
+            Tables\Columns\IconColumn::make('featured')->label('À la une')->boolean()->toggleable(),
+            Tables\Columns\TextColumn::make('published_at')->label('Publié le')->dateTime()->sortable(),
+            Tables\Columns\TextColumn::make('user.name')->label('Auteur')->toggleable(),
+        ])
+        ->filters([
+            Tables\Filters\TernaryFilter::make('published')
+                ->label('Publié')
+                ->trueLabel('Avec date de publication')
+                ->falseLabel('Sans date de publication')
+                ->queries(
+                    true: fn ($q) => $q->whereNotNull('published_at')->where('published_at', '<=', now()),
+                    false: fn ($q) => $q->whereNull('published_at'),
+                    blank: fn ($q) => $q,
+                ),
+            Tables\Filters\SelectFilter::make('category_id')
+                ->relationship('category', 'name')
+                ->label('Catégorie'),
+        ])
+        ->actions([
+            \Filament\Actions\EditAction::make(),
+            \Filament\Actions\DeleteAction::make(),
+        ])
+        ->bulkActions([
+            \Filament\Actions\DeleteBulkAction::make(),
+        ]);
+}
+
 
     public static function getPages(): array
     {

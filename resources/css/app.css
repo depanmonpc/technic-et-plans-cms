@@ -1,6 +1,7 @@
 /* On importe les anciens styles */
 @import url('../../public/asset/css/style.css');
 
+
 /* Slick Carousel */
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";

@@ -16,11 +16,11 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css"/>
 
-    <!-- Ton style CSS principal -->
-    <link rel="stylesheet" href="<?php echo e(asset('asset/css/style.css')); ?>">
-
     <!-- Scripts compilés -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+
+    <!-- Ton style CSS principal -->
+    <link rel="stylesheet" href="<?php echo e(asset('asset/css/style.css')); ?>">
 
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
 
