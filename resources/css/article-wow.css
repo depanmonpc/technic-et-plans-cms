@@ -1,0 +1,76 @@
+:root{
+  --paper:#fff; --ink:#141414; --muted:#6b7280;
+  --brand:#c79a2b; --ring:rgba(199,154,43,.25);
+  --radius:18px; --container:1120px;
+}
+.aw-container{max-width:var(--container);margin-inline:auto;padding-inline:1.25rem}
+
+/* Progress bar */
+.aw-progress{position:fixed;inset:0 0 auto 0;height:3px;z-index:70;
+  background:linear-gradient(90deg,var(--brand) 0,var(--brand) 0) no-repeat;
+  background-size:var(--p,0%) 100%; box-shadow:0 1px 0 rgba(0,0,0,.06)}
+
+/* Article shell */
+.aw-article{background:var(--paper);color:var(--ink)}
+
+/* HERO */
+.aw-hero{
+  position:relative;min-height:52vh;display:grid;align-items:end;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.25), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.15) 35%, transparent 60%),
+    var(--hero, none) center/cover no-repeat, #222;
+  color:#fff;border-bottom:3px solid var(--brand);
+}
+.aw-hero__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 45%)}
+.aw-hero__content{position:relative;padding:4rem 1.25rem 3rem}
+.aw-breadcrumb{margin:0 0 .75rem;opacity:.9;font-size:.92rem}
+.aw-breadcrumb a{color:#fff;text-decoration:none;border-bottom:1px solid transparent}
+.aw-breadcrumb a:hover{border-bottom-color:#fff}
+.aw-title{font-size:clamp(2rem,3.2vw,3.2rem);line-height:1.1;margin:0 0 .5rem;font-weight:800;letter-spacing:.2px}
+.aw-meta{opacity:.95;font-size:.98rem}
+
+/* Layout */
+.aw-layout{display:grid;grid-template-columns:1fr;gap:2rem;padding:2rem 0}
+@media (min-width:1024px){
+  .aw-layout{grid-template-columns:minmax(0,1fr) 280px}
+  .aw-aside{position:sticky;top:6rem;height:max-content}
+}
+.aw-card{background:#fff;border:1px solid #eee;border-radius:var(--radius);padding:1rem;box-shadow:0 8px 30px rgba(0,0,0,.05)}
+.aw-card__title{font-weight:700;margin-bottom:.6rem}
+.aw-share{display:block;text-align:center;border:1px solid #e5e7eb;border-radius:12px;padding:.55rem .8rem;margin:.4rem 0;text-decoration:none;color:var(--ink);font-weight:600}
+.aw-share:hover{border-color:var(--brand);box-shadow:0 0 0 3px var(--ring)}
+
+/* Prose (look éditorial) */
+.prose{font-size:1.08rem;line-height:1.78}
+.prose p{margin:1rem 0;color:#1f2937}
+.prose > p:first-of-type::first-letter{
+  float:left;font-size:3.2rem;line-height:1;padding:.35rem .55rem 0 0;
+  font-weight:800;color:var(--brand);
+}
+.prose h2{margin:2.2rem 0 1rem;font-size:1.65rem;line-height:1.25}
+.prose h3{margin:1.6rem 0 .6rem;font-size:1.25rem}
+.prose a{color:var(--brand);text-decoration:underline;text-underline-offset:3px}
+.prose strong{font-weight:800}
+.prose img{max-width:100%;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.prose figure{margin:1.5rem 0;text-align:center}
+.prose figcaption{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.prose blockquote{margin:1.5rem 0;padding:1rem 1.25rem;border-left:4px solid var(--brand);
+  background:linear-gradient(90deg,rgba(199,154,43,.06),transparent);
+  border-radius:0 14px 14px 0;font-style:italic}
+.prose ul, .prose ol{margin:1rem 0 1rem 1.25rem}
+.prose code{background:#f7f7f7;border:1px solid #eee;border-radius:6px;padding:.1rem .35rem;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+.prose pre{background:#0f172a;color:#f8fafc;border-radius:14px;padding:1rem 1.25rem;overflow:auto}
+
+/* Next/Prev */
+.aw-nextprev{display:grid;grid-template-columns:1fr;gap:1rem;margin:2rem 0}
+@media (min-width:800px){.aw-nextprev{grid-template-columns:1fr 1fr}}
+.aw-nextprev__card{border:1px solid #eee;border-radius:16px;padding:1rem;text-decoration:none;color:var(--ink);background:#fff}
+.aw-nextprev__card:hover{border-color:var(--brand);box-shadow:0 0 0 4px var(--ring)}
+.aw-nextprev__card small{display:block;color:var(--muted);margin-bottom:.25rem;letter-spacing:.02em}
+.aw-nextprev__card span{font-weight:700}
+
+/* Back link */
+.aw-back{padding:0 0 3rem}
+.aw-back a{text-decoration:none;color:var(--ink);border-bottom:2px solid var(--brand)}
+.aw-back a:hover{opacity:.85}
